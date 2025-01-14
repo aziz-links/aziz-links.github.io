@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aziz Belhadj Sayar</title>
+    <style>
+        body {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyii6p2jvV3wYuu1CSuHm_9KCN-rGJ0uIerAu-qALIBeqhB9Nbx85Z465ExNzgAVSH3/exec';
+
+        async function logAndRedirect() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const action = urlParams.get('action');
+
+            const config = {
+                github: {
+                    message: "github visited",
+                    redirect: "https://github.com/azizbelhadjsayar"
+                },
+                linkedin: {
+                    message: "linkedin visited",
+                    redirect: "https://www.linkedin.com/in/azizbelhadjsayar/"
+                },
+                portfolio: {
+                    message: "portfolio visited",
+                    redirect: "https://azizbelhadjsayar.github.io/"
+                },
+                default: {
+                    message: "Default message logged",
+                    redirect: "https://github.com/azizbelhadjsayar"
+                }
+            };
+
+            const data = config[action] || config.default;
+            
+            window.location.replace(data.redirect);
+
+            const payload = JSON.stringify({ message: data.message });
+
+            fetch(scriptURL, {
+                method: 'POST',
+                body: payload,
+                keepalive: true
+            });
+
+            window.location.replace(data.redirect);
+        }
+
+        window.onload = logAndRedirect;
+    </script>
+</body>
+</html>
