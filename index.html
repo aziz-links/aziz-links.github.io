@@ -87,7 +87,7 @@
         async function logAndRedirect() {
             const urlParams = new URLSearchParams(window.location.search);
             const action = urlParams.get('action');
-            const msg = urlParams.get('msg');
+            const msg = urlParams.get('msg') || "no msg";
 
             const data = config.get(action) || config.get("default");
             
