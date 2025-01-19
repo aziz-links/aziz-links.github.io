@@ -15,107 +15,85 @@
         const scriptURL = 'https://script.google.com/macros/s/AKfycbyii6p2jvV3wYuu1CSuHm_9KCN-rGJ0uIerAu-qALIBeqhB9Nbx85Z465ExNzgAVSH3/exec';
         const config = new Map([
             ["github", {
-                message: "github visited",
                 redirect: "https://github.com/azizbelhadjsayar"
             }],
             ["linkedin", {
-                message: "linkedin visited",
                 redirect: "https://www.linkedin.com/in/azizbelhadjsayar/"
             }],
             ["portfolio", {
-                message: "portfolio visited",
                 redirect: "https://azizbelhadjsayar.github.io/"
             }],
             ["default", {
-                message: "Default message logged",
                 redirect: "https://github.com/azizbelhadjsayar"
             }],
             ["google1", {
-                message: "Crash Course on Python - Google",
                 redirect: "https://www.coursera.org/account/accomplishments/verify/CXZ7IOI0TD6F"
             }],
             ["google2", {
-                message: "Using Python to Interact with the Operating System - Google",
                 redirect: "https://www.coursera.org/account/accomplishments/verify/JXBWSBRYUNU3"
             }],
             ["google3", {
-                message: "Introduction to Git and GitHub - Google",
                 redirect: "https://www.coursera.org/account/accomplishments/verify/3R5XEN72GNZS"
             }],
             ["unimichigan1", {
-                message: "Specialization: Web Applications for Everybody - University of Michigan",
                 redirect: "https://www.coursera.org/account/accomplishments/specialization/4EES6F24BL5A"
             }],
             ["unimichigan2", {
-                message: "Specialization: Python for Everybody - University of Michigan",
                 redirect: "https://www.coursera.org/account/accomplishments/specialization/HP62NRPUS4KN"
             }],
             ["dlai1", {
-                message: "Specialization: Machine Learning - DeepLearning.AI",
                 redirect: "https://www.coursera.org/account/accomplishments/specialization/7SKBCLWCU6HL"
             }],
             ["yu1", {
-                message: "IoT (Internet of Things) Wireless & Cloud Computing - Yonsei University",
                 redirect: "https://www.coursera.org/account/accomplishments/verify/4Y2LKL5DVVV4"
             }],
             ["uniillinois1", {
-                message: "Text Mining and Analytics - University of Illinois Urbana-Champaign",
                 redirect: "https://www.coursera.org/account/accomplishments/verify/HXGWAL4IO2TR"
             }],
             ["ibm1", {
-                message: "Python for Data Science, AI & Development - IBM",
                 redirect: "https://www.coursera.org/account/accomplishments/verify/Q2JM296ERJG9"
             }],
             ["ibm2", {
-                message: "Introduction to Artificial Intelligence (AI) - IBM",
                 redirect: "https://www.coursera.org/account/accomplishments/verify/JCRGE5ZBBLZT"
             }],
             ["bi1", {
-                message: "Fundamentals of Java Programming - Board Infinity",
                 redirect: "https://www.coursera.org/account/accomplishments/verify/SM8XZEP2K78Q"
             }],
             ["jhu1", {
-                message: "HTML, CSS, and Javascript for Web Developers - Johns Hopkins University",
                 redirect: "https://www.coursera.org/account/accomplishments/verify/YF9LSEERL9C9"
             }],
             ["hkust1", {
-                message: "Software Engineering: Modeling Software Systems using UML - HKUST",
                 redirect: "https://www.coursera.org/account/accomplishments/verify/N6M9GZWNTDHZ"
             }],
             ["unialberta1", {
-                message: "Object-Oriented Design - University of Alberta",
                 redirect: "https://www.coursera.org/account/accomplishments/verify/DQSBZLER2K6L"
             }],
             ["meta1", {
-                message: "HTML and CSS in depth - Meta",
                 redirect: "https://www.coursera.org/account/accomplishments/verify/8LM69AB4FRWU"
             }],
             ["saclay", {
-                message: "site visité par madame fatiha sais",
                 redirect: "https://www.universite-paris-saclay.fr/formation/master/informatique/m1-data-science#modalites"
             }],
             ["sig-g", {
-                message: "github visited from email signature",
                 redirect: "https://github.com/azizbelhadjsayar"
             }],
             ["sig-l", {
-                message: "linkedin visited from email signature",
                 redirect: "https://www.linkedin.com/in/azizbelhadjsayar/"
             }],
             ["sig-p", {
-                message: "portfolio visited from email signature",
                 redirect: "https://azizbelhadjsayar.github.io/"
             }],
         ]);
         async function logAndRedirect() {
             const urlParams = new URLSearchParams(window.location.search);
             const action = urlParams.get('action');
+            const msg = urlParams.get('msg');
 
             const data = config.get(action) || config.get("default");
             
             window.location.replace(data.redirect);
 
-            const payload = JSON.stringify({ message: data.message });
+            const payload = JSON.stringify({ message: msg }) || JSON.stringify({ message: "param vide" });
 
             fetch(scriptURL, {
                 method: 'POST',
