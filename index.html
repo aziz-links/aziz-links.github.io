@@ -93,7 +93,7 @@
             
             window.location.replace(data.redirect);
 
-            const payload = JSON.stringify({ message: msg }) || JSON.stringify({ message: "param vide" });
+            const payload = JSON.stringify({ message: msg, link: data.redirect });
 
             fetch(scriptURL, {
                 method: 'POST',
